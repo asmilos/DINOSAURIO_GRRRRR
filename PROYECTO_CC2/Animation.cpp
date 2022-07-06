@@ -1,8 +1,8 @@
 #include "Animation.h"
+using namespace sf;
 
 
-
-Animation::Animation(sf::Texture* texture, sf::Vector2u imageCount, float switchTime)
+Animation::Animation(Texture* texture, Vector2u imageCount, float switchTime)
 {
 	this->imageCount = imageCount;
 	this->switchTime = switchTime;
@@ -11,8 +11,6 @@ Animation::Animation(sf::Texture* texture, sf::Vector2u imageCount, float switch
 
 	uvRect.width = texture->getSize().x / float(imageCount.x);
 	uvRect.height = texture->getSize().y / float(imageCount.y);
-
-
 }
 
 

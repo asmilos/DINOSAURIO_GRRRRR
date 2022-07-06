@@ -29,6 +29,7 @@ private:
 	float speed;
 	
 	bool faceRight;
+
 	//Esto es lo de gravedad y salto
 	Vector2f velocity;
 	bool canJump;
