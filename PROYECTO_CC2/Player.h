@@ -9,7 +9,7 @@ using namespace sf;
 class Player
 {
 public:
-	Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, float jumpHeight);
+	Player(std::string nameTexture, sf::Vector2u imageCount, string controls, float switchTime, float speed, float jumpHeight);
 	~Player();
 
 	void Update(float deltaTime);
@@ -22,13 +22,17 @@ public:
 		return Collider(body);
 	}
 private:
+	Texture* texture;
 	RectangleShape body;
-	Animation animation;
+	Animation* animation;
 
 	unsigned int row;
 	float speed;
 	
 	bool faceRight;
+
+	// controles
+	string controls;
 
 	//Esto es lo de gravedad y salto
 	Vector2f velocity;

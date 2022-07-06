@@ -8,14 +8,14 @@ using namespace sf;
 class GameScene
 {
 public:
-	GameScene(RenderWindow* window,View * view, const float VIEW_HEIGHT, Player *& player,vector<Platform> platforms);
-	void gameloop();
+	GameScene(RenderWindow* window,View * view, const float VIEW_HEIGHT, vector<Player> players,vector<Platform> platforms);
+	void loop();
 	void ResizeView();
 	void events();
 private:
 	RenderWindow* window;
 	View* view;
-	Player* player;
+	vector<Player> players;
 	vector<Platform> platforms;
 
 	Event* event;
@@ -23,5 +23,8 @@ private:
 	float deltaTime;
 	Clock clock;
 	const float VIEW_HEIGHT;
+
+	Texture* imgBackground;
+	Sprite* background;
 };
 

@@ -12,6 +12,8 @@ Collider::~Collider()
 {
 
 }
+
+// pasa el objeto en si temporalmente
 bool Collider::CheckCollider(Collider&& other, Vector2f& direction, float push)
 { 
 	Vector2f otherPosition = other.getPosition();

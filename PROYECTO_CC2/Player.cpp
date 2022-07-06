@@ -1,18 +1,24 @@
 #include "Player.h"
 using namespace sf;
 
-Player::Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, float jumpHeight):
-
-animation(texture, imageCount, switchTime)
+Player::Player(std::string nameTexture, sf::Vector2u imageCount, std::string controls, float switchTime, float speed, float jumpHeight)
 {
+		this->controls = controls;
 		this->speed = speed;
 		this->jumpHeight = jumpHeight;
+
 		row = 0;
 		faceRight = true;
-		body.setSize(Vector2f(100.0f, 100.0f));
+
+		texture = new Texture;
+		texture->loadFromFile(nameTexture);
+
+		body.setSize(Vector2f(50.0f, 50.0f));
 		body.setOrigin(body.getSize() / 2.0f);
 		body.setPosition(206.0f, 206.0f);
 		body.setTexture(texture);
+
+		animation = new Animation(texture, imageCount, switchTime);
 
 }
 
@@ -24,19 +30,36 @@ void Player::Update(float deltaTime)
 {   //Velocity tiene que ver con la gravedad
 	velocity.x = 0.0f;
 
-	
+	if(controls == "letters"){
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-		velocity.x -= speed ;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		velocity.x += speed ;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+			velocity.x -= speed;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+			velocity.x += speed;
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && canJump)
-	{
-		canJump = false;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && canJump)
+		{
+			canJump = false;
 
-		velocity.y = -sqrtf(2.0f * 981.0f * jumpHeight);
+			velocity.y = -sqrtf(2.0f * 981.0f * jumpHeight);
+		}
+
 	}
+	else if(controls == "arrows"){
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+			velocity.x -= speed;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+			velocity.x += speed;
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && canJump)
+		{
+			canJump = false;
+			velocity.y = -sqrtf(2.0f * 981.0f * jumpHeight);
+		}
+
+	}
+
 
 	velocity.y += 981.0f * deltaTime;
 
@@ -54,8 +77,8 @@ void Player::Update(float deltaTime)
 		else
 			faceRight = false;
 	}
-	animation.Update(row, deltaTime, faceRight);
-	body.setTextureRect(animation.uvRect);
+	animation->Update(row, deltaTime, faceRight);
+	body.setTextureRect(animation->uvRect);
 	body.move(velocity * deltaTime);
 }
 

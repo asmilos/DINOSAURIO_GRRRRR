@@ -1,9 +1,16 @@
 #include "GameScene.h"
 
-GameScene::GameScene(RenderWindow* window, View * view, const float VIEW_HEIGHT , Player *& player, vector<Platform> platforms)
-    : window(window) , view(view), VIEW_HEIGHT(VIEW_HEIGHT), player(player), platforms(platforms) {
+GameScene::GameScene(RenderWindow* window, View * view, const float VIEW_HEIGHT , vector<Player> players, vector<Platform> platforms)
+    : window(window) , view(view), VIEW_HEIGHT(VIEW_HEIGHT), players(players), platforms(platforms) {
     deltaTime = 0.0f;
     event = new Event;
+    
+    imgBackground = new Texture;
+    imgBackground->loadFromFile("background.jpeg");
+
+    background = new Sprite(*imgBackground);
+    background->setScale({ 1.5,1.5 });
+
 }
 
 
@@ -30,37 +37,48 @@ void GameScene::events() {
 }
 
 
-void GameScene::gameloop() {
+void GameScene::loop() {
 
-    while (window->isOpen())
-    {
         deltaTime = clock.restart().asSeconds();
         
         events();
 
-        player->Update(deltaTime);
+        for (Player& player : players) {
+            player.Update(deltaTime);
+        }
+
 
         Vector2f direction;
 
-        for (Platform& platform : platforms)
-            if (platform.GetCollider().CheckCollider(player->GetCollider(), direction, 1.0f))
-                player->OnCollision(direction);
+        for (Platform& platform : platforms) {
+            for (Player& player : players)
+                if (platform.GetCollider().CheckCollider(player.GetCollider(), direction, 1.0f))
+                {
+                    player.OnCollision(direction);
+                }
+
+        }
 
 
-        view->setCenter(player->GetPosition());
-
+        view->setCenter(players.at(0).GetPosition());
 
         window->clear(Color(100, 100, 100));
+        window->draw(*background);
+
         window->setView(*view);
 
 
-        player->Draw(*window);
+        // jugadores
+        for (Player& player : players) {
+            player.Draw(*window);
+        }
 
+        // plataformas
         for (Platform& platform : platforms)
             platform.Draw(*window);
 
         window->display();
-    }
+    
 
 }
 

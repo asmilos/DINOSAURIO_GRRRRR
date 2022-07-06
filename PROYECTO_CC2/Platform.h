@@ -7,7 +7,7 @@ using namespace sf;
 class Platform
 {
 public:
-	Platform(Texture* texture, Vector2f size, Vector2f position);
+	Platform(std::string nameTexture, Vector2f size, Vector2f position);
 	~Platform(); 
 
 	void Draw(RenderWindow& window);
@@ -15,6 +15,7 @@ public:
 	}
 
 private:
+	Texture* texture; 
 	RectangleShape body;
 };
 
