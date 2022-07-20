@@ -72,7 +72,7 @@ void GameScene::loop() {
         window->clear(Color(100, 100, 100));
         window->draw(*background);
 
-        window->setView(*view);
+        //window->setView(*view);//seguir camara de jugador
 
 
         // jugadores

@@ -15,7 +15,7 @@ Player::Player(std::string nameTexture, sf::Vector2u imageCount, std::string con
 
 		body.setSize(Vector2f(50.0f, 50.0f));
 		body.setOrigin(body.getSize() / 2.0f);
-		body.setPosition(position);
+		body.setPosition(50.0f, 500.0f);
 		body.setTexture(texture);
 
 		animation = new Animation(texture, imageCount, switchTime);
