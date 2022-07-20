@@ -9,7 +9,7 @@ using namespace sf;
 class Player
 {
 public:
-	Player(std::string nameTexture, sf::Vector2u imageCount, string controls, float switchTime, float speed, float jumpHeight);
+	Player(std::string nameTexture, sf::Vector2u imageCount, string controls, float switchTime, Vector2f position);
 	~Player();
 
 	void Update(float deltaTime);

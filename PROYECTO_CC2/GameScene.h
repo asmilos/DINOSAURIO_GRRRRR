@@ -2,10 +2,11 @@
 #include"SFML/Graphics.hpp"
 #include"Platform.h"
 #include"Player.h"
+#include"Scene.h"
 #include<vector>
 using namespace sf;
 
-class GameScene
+class GameScene : public Scene
 {
 public:
 	GameScene(RenderWindow* window,View * view, const float VIEW_HEIGHT, vector<Player> players,vector<Platform> platforms);
@@ -13,18 +14,17 @@ public:
 	void ResizeView();
 	void events();
 private:
-	RenderWindow* window;
 	View* view;
 	vector<Player> players;
 	vector<Platform> platforms;
-
-	Event* event;
 
 	float deltaTime;
 	Clock clock;
 	const float VIEW_HEIGHT;
 
-	Texture* imgBackground;
-	Sprite* background;
+	Clock* clockTimer;
+	Time* timeTimer;
+	int totalTime;
+	Text* textTimer;
 };
 

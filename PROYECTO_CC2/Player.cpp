@@ -1,11 +1,11 @@
 #include "Player.h"
 using namespace sf;
 
-Player::Player(std::string nameTexture, sf::Vector2u imageCount, std::string controls, float switchTime, float speed, float jumpHeight)
+Player::Player(std::string nameTexture, sf::Vector2u imageCount, std::string controls, float switchTime, Vector2f position)
 {
 		this->controls = controls;
-		this->speed = speed;
-		this->jumpHeight = jumpHeight;
+		this->speed = 200.0f;
+		this->jumpHeight = 100.0f;
 
 		row = 0;
 		faceRight = true;
@@ -15,7 +15,7 @@ Player::Player(std::string nameTexture, sf::Vector2u imageCount, std::string con
 
 		body.setSize(Vector2f(50.0f, 50.0f));
 		body.setOrigin(body.getSize() / 2.0f);
-		body.setPosition(206.0f, 206.0f);
+		body.setPosition(position);
 		body.setTexture(texture);
 
 		animation = new Animation(texture, imageCount, switchTime);
