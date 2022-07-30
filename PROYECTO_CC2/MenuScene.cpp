@@ -7,12 +7,12 @@ MenuScene::MenuScene(RenderWindow * window, int & opc)
     tempOpc = 1;
 
     texture = new Texture;
-    texture->loadFromFile("menu-background.jpg");
+    texture->loadFromFile("Images/menu-background.jpg");
     background.setTexture(texture);
     background.setSize({ 800,600 });
 
     txt_pointer = new Texture;
-    txt_pointer->loadFromFile("pointer.png");
+    txt_pointer->loadFromFile("Images/pointer.png");
 
     spt_pointer = new Sprite(*txt_pointer);
     ptrPosition = { 120,110 };

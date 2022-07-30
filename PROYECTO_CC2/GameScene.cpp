@@ -6,7 +6,7 @@ GameScene::GameScene(RenderWindow* window, View * view, const float VIEW_HEIGHT 
     deltaTime = 0.0f;
     
     imgBackground = new Texture;
-    imgBackground->loadFromFile("background.jpeg");
+    imgBackground->loadFromFile("Images/background.jpeg");
 
     background = new Sprite(*imgBackground);
     background->setScale({ 1.5,1.5 });
@@ -63,7 +63,6 @@ void GameScene::loop() {
                 {
                     player.OnCollision(direction);
                 }
-
         }
 
 
@@ -90,6 +89,5 @@ void GameScene::loop() {
         window->draw(*textTimer);
 
         window->display();
-   
 }
 
